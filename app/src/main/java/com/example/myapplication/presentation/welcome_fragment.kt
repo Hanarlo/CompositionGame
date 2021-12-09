@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentWelcomeFragmentBinding
 import java.lang.RuntimeException
@@ -37,10 +38,7 @@ class welcome_fragment : Fragment() {
     }
 
     private fun launchChooseLevelFragment(){
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.mainContainer, fragment_level_choose.newInstance())
-            .addToBackStack(fragment_level_choose.NAME)
-            .commit()
+        findNavController().navigate(R.id.action_welcome_fragment_to_fragment_level_choose2)
 
     }
 

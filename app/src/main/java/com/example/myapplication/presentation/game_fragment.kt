@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentGameFragmentBinding
 import com.example.myapplication.domain.entity.GameResult
@@ -18,9 +20,7 @@ import java.lang.RuntimeException
 
 
 class game_fragment : Fragment() {
-
-    private lateinit var level: level
-    //private lateinit var result: GameResult
+    val args by navArgs<game_fragmentArgs>()
     private val viewModel: GameViewModel by lazy {
         ViewModelProvider(
             this,
@@ -44,7 +44,6 @@ class game_fragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parseArgs()
     }
 
     override fun onCreateView(
@@ -59,7 +58,7 @@ class game_fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeVM()
-        viewModel.startGame(level)
+        viewModel.startGame(args.level)
         setClickListeners()
     }
 
@@ -115,29 +114,8 @@ class game_fragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    private fun parseArgs(){
-        requireArguments().getParcelable<level>(KEY_LEVEL)?.let {
-            level = it
-        }
-    }
-    companion object{
-        const val NAME = "GameFragment"
-        private const val KEY_LEVEL = "level"
-
-        fun newInstance(level: level): game_fragment{
-            return game_fragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_LEVEL, level)
-                }
-            }
-
-        }
-    }
     private fun launchFinishGameActivity(gameResult: GameResult){
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.mainContainer, finished_game_fragment.getInstance(gameResult))
-                .addToBackStack(finished_game_fragment.NAME)
-                .commit()
+        findNavController().navigate(game_fragmentDirections.actionGameFragmentToFinishedGameFragment(gameResult))
+
     }
 }

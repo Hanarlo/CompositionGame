@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/welcome_fragment">
+
+    <fragment
+        android:id="@+id/welcome_fragment"
+        android:name="com.example.myapplication.presentation.welcome_fragment"
+        android:label="fragment_welcome_fragment"
+        tools:layout="@layout/fragment_welcome_fragment" >
+        <action
+            android:id="@+id/action_welcome_fragment_to_fragment_level_choose2"
+            app:destination="@id/fragment_level_choose2" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_level_choose2"
+        android:name="com.example.myapplication.presentation.fragment_level_choose"
+        android:label="fragment_level_choose"
+        tools:layout="@layout/fragment_level_choose" >
+        <action
+            android:id="@+id/action_fragment_level_choose2_to_game_fragment"
+            app:destination="@id/game_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/game_fragment"
+        android:name="com.example.myapplication.presentation.game_fragment"
+        android:label="fragment_game_fragment"
+        tools:layout="@layout/fragment_game_fragment" >
+        <action
+            android:id="@+id/action_game_fragment_to_finished_game_fragment"
+            app:destination="@id/finished_game_fragment"
+            app:popUpTo="@id/game_fragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="level"
+            app:argType="com.example.myapplication.domain.entity.level" />
+    </fragment>
+    <fragment
+        android:id="@+id/finished_game_fragment"
+        android:name="com.example.myapplication.presentation.finished_game_fragment"
+        android:label="fragment_finished_game_fragment"
+        tools:layout="@layout/fragment_finished_game_fragment" >
+        <action
+            android:id="@+id/action_finished_game_fragment_to_fragment_level_choose2"
+            app:destination="@id/fragment_level_choose2" />
+        <argument
+            android:name="GameResults"
+            app:argType="com.example.myapplication.domain.entity.GameResult" />
+    </fragment>
+</navigation>

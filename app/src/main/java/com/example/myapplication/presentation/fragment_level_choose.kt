@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentGameFragmentBinding
 import com.example.myapplication.databinding.FragmentLevelChooseBinding
@@ -31,12 +32,6 @@ class fragment_level_choose : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-    companion object{
-        const val NAME = "chooseLevel"
-        fun newInstance(): fragment_level_choose{
-            return fragment_level_choose()
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,10 +52,7 @@ class fragment_level_choose : Fragment() {
 
     }
     private fun launchGameFragment(level: level){
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.mainContainer, game_fragment.newInstance(level))
-            .addToBackStack(game_fragment.NAME)
-            .commit()
+        findNavController().navigate(fragment_level_chooseDirections.actionFragmentLevelChoose2ToGameFragment(level))
+        }
 
     }
-}

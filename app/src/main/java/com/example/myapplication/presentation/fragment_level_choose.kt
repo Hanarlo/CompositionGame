@@ -8,15 +8,13 @@ import android.view.ViewGroup
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentGameFragmentBinding
 import com.example.myapplication.databinding.FragmentLevelChooseBinding
+import com.example.myapplication.domain.entity.level
 import java.lang.RuntimeException
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class fragment_level_choose : Fragment() {
     private var _binding: FragmentLevelChooseBinding? = null
     private val binding: FragmentLevelChooseBinding
-        get() = _binding ?: throw RuntimeException("FragmentWElcomeBinding == null")
+        get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,5 +30,37 @@ class fragment_level_choose : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    companion object{
+        const val NAME = "chooseLevel"
+        fun newInstance(): fragment_level_choose{
+            return fragment_level_choose()
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with(binding){
+            levelEasyButton.setOnClickListener {
+                launchGameFragment(level.EASY)
+            }
+            levelMediumButton.setOnClickListener {
+                launchGameFragment(level.NORMAL)
+            }
+            levelHardButton.setOnClickListener {
+                launchGameFragment(level.HARD)
+            }
+            levelTestButton.setOnClickListener {
+                launchGameFragment(level.TEST)
+            }
+        }
+
+    }
+    private fun launchGameFragment(level: level){
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.mainContainer, game_fragment.newInstance(level))
+            .addToBackStack(game_fragment.NAME)
+            .commit()
+
     }
 }

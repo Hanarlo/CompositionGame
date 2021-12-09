@@ -32,12 +32,22 @@ class welcome_fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.button.setOnClickListener {
-
+        launchChooseLevelFragment()
         }
+    }
+
+    private fun launchChooseLevelFragment(){
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.mainContainer, fragment_level_choose.newInstance())
+            .addToBackStack(fragment_level_choose.NAME)
+            .commit()
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

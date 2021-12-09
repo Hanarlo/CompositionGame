@@ -16,19 +16,19 @@
         android:textSize="25sp"/>
 
     <Button
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:id="@+id/level_hard_button"
+        android:id="@+id/level_test_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
         android:text="@string/test_level" />
 
     <Button
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/level_test_button"
+        android:id="@+id/level_easy_button"
         android:backgroundTint="@color/green"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/level_easy_button"
+        android:id="@+id/level_medium_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/orange"
@@ -49,7 +49,7 @@
         android:layout_marginLeft="10dp"
         android:backgroundTint="@color/red"
         android:layout_marginRight="10dp"
-        android:id="@+id/level_normal_button"
+        android:id="@+id/level_hard_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/hard_level" />
